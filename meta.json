@@ -1,15 +1,15 @@
 { 
    "licenseType" : "CC BY-SA", 
-   "creatorName" : "Author", 
-   "packageName" : "MyPlugin", 
-   "includeVersionsInReferences" : "true", 
-   "description" : "v0.0.0 MyPlugin Description", 
+   "creatorName" : "AcidBubbles", 
+   "packageName" : "BlendShapes", 
+   "standardReferenceVersionOption" : "Latest", 
+   "scriptReferenceVersionOption" : "Minimum", 
+   "description" : "v0.0.0 Allows controlling and animating CustomUnityAsset blendshapes", 
    "credits" : "", 
-   "instructions" : "", 
-   "promotionalLink" : "https://github.com/Author/MyPlugin", 
-   "programVersion" : "1.19.0.5", 
+   "instructions" : "Add to a CustomUnityAsset that has blend shapes", 
+   "promotionalLink" : "https://github.com/acidbubbles/vam-cuablendshapes", 
    "contentList" : [ 
-      "Custom\\Scripts\\Author\\MyPlugin\\MyPlugin.cs"
+      "Custom\\Scripts\\AcidBubbles\\BlendShapes\\BlendShapes.cs"
    ], 
    "dependencies" : { 
    }
