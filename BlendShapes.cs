@@ -13,10 +13,7 @@ public class BlendShapes : MVRScript
 
         _container = containingAtom.transform.Find("reParentObject/object/rescaleObject");
 
-        if(!TryRegisterCUA())
-        {
-            SuperController.singleton.StartCoroutine(WaitForCUA());
-        }
+        SuperController.singleton.StartCoroutine(WaitForCUA());
     }
 
     private void RefreshBlendShapes()
@@ -76,6 +73,8 @@ public class BlendShapes : MVRScript
             _storables.Add(storable);
         }
         while (++blendShapeIndex < renderer.sharedMesh.blendShapeCount);
+
+        containingAtom.RestoreFromLast(this);
 
         return true;
     }
