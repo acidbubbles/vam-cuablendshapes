@@ -28,7 +28,7 @@ public class BlendShapes : MVRScript
 
     private bool TryRegisterCUA()
     {
-        var renderer = containingAtom.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        var renderer = _container.GetComponentInChildren<SkinnedMeshRenderer>();
         if (renderer == null)
         {
             // SuperController.LogError("The atom '" + containingAtom.name + "' does not have any SkinnedMeshRenderer");
