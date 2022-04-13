@@ -16,18 +16,6 @@ public class BlendShapes : MVRScript
         SuperController.singleton.StartCoroutine(WaitForCUA());
     }
 
-    private void RefreshBlendShapes()
-    {
-        foreach(var storable in _storables)
-        {
-            RemoveSlider(storable);
-            DeregisterFloat(storable);
-        }
-        _storables.Clear();
-
-        TryRegisterCUA();
-    }
-
     private IEnumerator WaitForCUA()
     {
         yield return new WaitForEndOfFrame();
@@ -77,5 +65,17 @@ public class BlendShapes : MVRScript
         containingAtom.RestoreFromLast(this);
 
         return true;
+    }
+
+    private void RefreshBlendShapes()
+    {
+        foreach(var storable in _storables)
+        {
+            RemoveSlider(storable);
+            DeregisterFloat(storable);
+        }
+        _storables.Clear();
+
+        TryRegisterCUA();
     }
 }
