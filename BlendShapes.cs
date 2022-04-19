@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class BlendShapes : MVRScript
 {
-    private Transform _container;
     private List<JSONStorableFloat> _storables = new List<JSONStorableFloat>();
 
     public override void Init()
     {
-        CreateButton("Refresh BlendShapes", true).button.onClick.AddListener(RefreshBlendShapes);
+        if (containingAtom == null || containingAtom.type != "CustomUnityAsset")
+        {
+            SuperController.LogError("BlendShapes can only be used on a CustomUnityAsset.");
+            enabled = false;
+            return;
+        }
 
-        _container = containingAtom.transform.Find("reParentObject/object/rescaleObject");
+        CreateButton("Refresh BlendShapes", true).button.onClick.AddListener(RefreshBlendShapes);
 
         SuperController.singleton.StartCoroutine(WaitForCUA());
     }
@@ -28,7 +32,7 @@ public class BlendShapes : MVRScript
 
     private bool TryRegisterCUA()
     {
-        var renderer = _container.GetComponentInChildren<SkinnedMeshRenderer>();
+        var renderer = containingAtom.childAtomContainer.GetComponentInChildren<SkinnedMeshRenderer>();
         if (renderer == null)
         {
             // SuperController.LogError("The atom '" + containingAtom.name + "' does not have any SkinnedMeshRenderer");
@@ -49,9 +53,7 @@ public class BlendShapes : MVRScript
             var storable = new JSONStorableFloat(
                 mesh.GetBlendShapeName(blendShapeIndex),
                 renderer.GetBlendShapeWeight(blendShapeIndex),
-                new JSONStorableFloat.SetFloatCallback(val => {
-                    renderer.SetBlendShapeWeight(localBlendShapeIndex, val);
-                }),
+                val => renderer.SetBlendShapeWeight(localBlendShapeIndex, val),
                 0f,
                 100f,
                 false
